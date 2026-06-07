@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid-square {
+    border: 1px dashed black;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.hovered {
+    background-color: darkgrey;
+}
+
+button {
+    margin: 5px auto;
+    padding: 2px;
+}
