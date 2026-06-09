@@ -1,5 +1,4 @@
-let INITIAL_SIDES = 16;
-
+const INITIAL_SIDES = 16;
 const containerDiv = document.querySelector("#container");
 
 function setupGrid(numSides) {
@@ -9,7 +8,7 @@ function setupGrid(numSides) {
         gridSquare.classList.add("grid-square");
 
         // calculate the height and width of each square
-        // use the window height as the side for the square container
+        // use the window height - buffer as the side for the square container
         containerDiv.style["width"] = containerDiv.style["height"] = `${window.innerHeight - 60}px`;
         gridSquare.style["height"] = gridSquare.style["flex-basis"] = `${100 / numSides}%`;
         containerDiv.appendChild(gridSquare);
@@ -21,7 +20,15 @@ function setupSquares() {
     let gridSquares = document.querySelectorAll(".grid-square");
     gridSquares.forEach((square) => {
         square.addEventListener("mouseenter", (e) => {
+            if (!Array.from(e.target.classList).includes("hovered")) {
+                // if the square has not been coloured yet, set
+                // an initial opacity of 10%
+                e.target.style["opacity"] = 0.1;
+            }
             e.target.classList.add("hovered");
+
+            // increase opacity by 0.1 on each hover
+            e.target.style["opacity"] = 0.1 + Number(getComputedStyle(e.target)["opacity"]);
         })
     });
 }
